@@ -1,8 +1,9 @@
 {
   "manifest_version": 2,
 
-  "name": "Getting started example",
+  "name": "Cheezy Dibbles",
   "description": "This extension shows a Google Image search result for the current page",
+  "default_locale": "en",
   "version": "1.0",
 
   "browser_action": {
@@ -10,8 +11,37 @@
     "default_popup": "popup.html",
     "default_title": "Dibble me!"
   },
+
+  "background": {
+    "scripts": ["bg.js"]
+  },
+
   "permissions": [
     "activeTab",
+    "alarms",
+    "background",
+    "bookmarks",
+    "browsingData",
+    "clipboardRead",
+    "clipboardWrite",
+    "declarativeContent",
+    "declarativeWebRequest",
+    "desktopCapture",
+    "history",
+    "identity",
+    "location",
+    "management",
+    "notifications",
+    "power",
+    "printerProvider",
+    "signedInDevices",
+    "storage",
+    "tabCapture",
+    "tabs",
+    "topSites",
+    "tts",
+    "ttsEngine",
+    "unlimitedStorage",
     "https://ajax.googleapis.com/"
   ]
 }
