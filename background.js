@@ -1,32 +1,38 @@
 var myFirebaseRef = new Firebase("https://glowing-torch-9630.firebaseio.com/");
 
 myFirebaseRef.child("user/text").on("value", function(snapshot) {
-  alert(snapshot.val());  // Alerts "San Francisco"
+  //alert(snapshot.val());  // Alerts "San Francisco"
 
-  if (snapshot.val() === "music") {
-    chrome.extension.getBackgroundPage().console.log('music');
-    chrome.tabs.query(
-        {
-          url:"https://play.google.com/music*",
-          currentWindow: true
-    }, function(tabs) {
-      chrome.extension.getBackgroundPage().console.log(tabs);
-      var tab = tabs[0];
-      chrome.tabs.update(tab.id, {active: true}); 
-    });
-  } else if (snapshot.val().indexOf("search for") > -1) {
+  //if (snapshot.val() === "music") {
+    //chrome.extension.getBackgroundPage().console.log('music');
+    //chrome.tabs.query(
+        //{
+          //url:"https://play.google.com/music*",
+          //currentWindow: true
+    //}, function(tabs) {
+      //chrome.extension.getBackgroundPage().console.log(tabs);
+      //var tab = tabs[0];
+      //chrome.tabs.update(tab.id, {active: true}); 
+    //});
+  if (snapshot.val().indexOf("search for") > -1) {
     var text = snapshot.val().split(" ").slice(2);
-    chrome.extension.getBackgroundPage().console.log(text);
+    //chrome.extension.getBackgroundPage().console.log(text);
 
-    chrome.tabs.query(
-        {
-          url:"https://play.google.com/music*",
-          currentWindow: true
-    }, function(tabs) {
-      chrome.extension.getBackgroundPage().console.log(tabs);
-      var tab = tabs[0];
-      chrome.tabs.update(tab.id, {active: true}); 
-    });
+    for (var i=0; i < text.length; i++) {
+      var patt1 = "*://*/*" + text[i].toLowerCase() + "*";
+      var patt2 = "*://*" + text[i].toLowerCase() +  "*/*";
+      //var titlePatt = new RegEx(text[i],"g");
+
+      chrome.tabs.query(
+          {
+            url:  patt1,
+            currentWindow: true
+      }, function(tabs) {
+        //chrome.extension.getBackgroundPage().console.log(tabs);
+        var tab = tabs[0];
+        chrome.tabs.update(tab.id, {active: true}); 
+      });
+    }
   }
 });
 
