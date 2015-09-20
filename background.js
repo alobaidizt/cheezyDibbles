@@ -285,7 +285,20 @@ debugger
 var myFirebaseRef = new Firebase("https://glowing-torch-9630.firebaseio.com/");
 
 myFirebaseRef.child("user/text").on("value", function(snapshot) {
-  alert(snapshot.val());  // Alerts "San Francisco"
+  //alert(snapshot.val());  // Alerts "San Francisco"
+
+  if (snapshot.val() === "music") {
+    chrome.extension.getBackgroundPage().console.log('music');
+    chrome.tabs.query(
+        {
+          url:"https://play.google.com/music*",
+          currentWindow: true
+    }, function(tabs) {
+      chrome.extension.getBackgroundPage().console.log(tabs);
+      var tab = tabs[0];
+      chrome.tabs.update(tab.id, {active: true}); 
+    });
+    }
 });
 
 //React when a browser action's icon is clicked.
