@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+  </head>
+  <body>
+
+    <h1>My First Heading</h1>
+
+    <p>My first paragraph.</p>
+    <button id="speak"> Dibble Me! </button>
+
+  </body>
+</html>
+<script>
+
+  var myFirebaseRef = new Firebase("https://glowing-torch-9630.firebaseio.com/");
+
+  var recognition = new webkitSpeechRecognition();
+
+    recognition.onstart = function() {};
+
+    recognition.onresult = function(event) {
+      var text = event.results[0][0].transcript;
+      console.log(text);
+    myFirebaseRef.child('user').set({
+      "text": text 
+    });
+    
+    };
+
+    recognition.onend = function() {};
+
+  document.getElementById("speak").addEventListener("click", speak);
+
+  function speak() {
+    recognition.start()
+  }
+  
+  
+</script>

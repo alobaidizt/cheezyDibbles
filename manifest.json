@@ -12,7 +12,9 @@
   },
 
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
 
   "permissions": [
@@ -24,16 +26,13 @@
     "clipboardRead",
     "clipboardWrite",
     "declarativeContent",
-    "declarativeWebRequest",
     "desktopCapture",
     "history",
     "identity",
-    "location",
     "management",
     "notifications",
     "power",
     "printerProvider",
-    "signedInDevices",
     "storage",
     "tabCapture",
     "tabs",

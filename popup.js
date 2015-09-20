@@ -93,6 +93,20 @@ function renderStatus(statusText) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+
+  document.getElementById("music").addEventListener("click", function() {
+    chrome.extension.getBackgroundPage().console.log('music');
+    chrome.tabs.query(
+        {
+          url:"https://play.google.com/music*",
+          currentWindow: true
+    }, function(tabs) {
+      chrome.extension.getBackgroundPage().console.log(tabs);
+      var tab = tabs[0];
+      chrome.tabs.update(tab.id, {active: true}); 
+    });
+  });
+
   getCurrentTabUrl(function(url) {
     // Put the image URL in Google search.
     renderStatus('Performing Google Image search for ' + url);
@@ -116,3 +130,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+
