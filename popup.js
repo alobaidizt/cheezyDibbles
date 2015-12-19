@@ -16,6 +16,7 @@ function getCurrentTabUrl(callback) {
     currentWindow: true
   };
 
+
   chrome.tabs.query(queryInfo, function(tabs) {
     // chrome.tabs.query invokes the callback with a list of tabs that match the
     // query. When the popup is opened, there is certainly a window and at least
@@ -46,6 +47,13 @@ function getCurrentTabUrl(callback) {
   // });
   // alert(url); // Shows "undefined", because chrome.tabs.query is async.
 }
+
+  function searchTabs() {
+    alert('hello')
+    console.log('got it!');
+    chrome.extension.getBackgroundPage().console.log('working');
+  }
+
 
 /**
  * @param {string} searchTerm - Search term for Google Image search.
@@ -94,18 +102,47 @@ function renderStatus(statusText) {
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  document.getElementById("music").addEventListener("click", function() {
-    chrome.extension.getBackgroundPage().console.log('music');
-    chrome.tabs.query(
-        {
-          url:"https://play.google.com/music*",
-          currentWindow: true
-    }, function(tabs) {
-      chrome.extension.getBackgroundPage().console.log(tabs);
-      var tab = tabs[0];
-      chrome.tabs.update(tab.id, {active: true}); 
-    });
+  document.getElementById("search").addEventListener("click", function() {
+
+    //var text = document.getElementById('keys').val().split(" ");
+    var text = document.getElementById("keys");
+    chrome.extension.getBackgroundPage().console.log(text);
+
+    for (var i=0; i < text.length; i++) {
+      var patt1 = "*://*/*" + text[i].toLowerCase() + "*";
+      var patt2 = "*://*" + text[i].toLowerCase() +  "*/*";
+      //var titlePatt = new RegEx(text[i],"g");
+
+      chrome.tabs.query(
+          {
+            url:  patt2,
+            currentWindow: true
+      }, function(tabs) {
+        var tab = tabs[0];
+        chrome.tabs.update(tab.id, {active: true}); 
+      });
+      chrome.tabs.query(
+          {
+            url:  patt1,
+            currentWindow: true
+      }, function(tabs) {
+        var tab = tabs[0];
+        chrome.tabs.update(tab.id, {active: true}); 
+      });
+    }
+
+    //chrome.extension.getBackgroundPage().console.log('working');
+    //chrome.tabs.query(
+        //{
+          //url:"https://play.google.com/music*",
+          //currentWindow: true
+    //}, function(tabs) {
+      //chrome.extension.getBackgroundPage().console.log(tabs);
+      //var tab = tabs[0];
+      //chrome.tabs.update(tab.id, {active: true}); 
+    //});
   });
+  
 
   getCurrentTabUrl(function(url) {
     // Put the image URL in Google search.
