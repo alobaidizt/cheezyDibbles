@@ -1,7 +1,17 @@
+html {
+  height: 100px;
+  width: 350px;
+}
+
 body {
   font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
   font-size: 100%;
 }
+
+li {
+  font-size: xx-small;
+}
+
 #status {
   /* avoid an excessively wide status text */
   white-space: pre;
