@@ -1,0 +1,19 @@
+{
+  "name": "cheezy-dibbles",
+  "version": "1.0.0",
+  "description": "dibble me",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alobaidizt/cheezyDibbles.git"
+  },
+  "author": "Ziyad Al-Obaidi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alobaidizt/cheezyDibbles/issues"
+  },
+  "homepage": "https://github.com/alobaidizt/cheezyDibbles#readme"
+}

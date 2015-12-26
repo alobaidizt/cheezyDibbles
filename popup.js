@@ -36,60 +36,57 @@
      matchedTabIds =  matchedTabIds.sort(function(a,b) { 
       return b.score - a.score;
     });
-    return matchedTabIds;
+    return matchedTabIds.map(function(obj) {return obj.tab;});
   }
+
+  function appendResults(tabs) {
+    var list = document.getElementById("list");
+    while (list.firstChild) {
+        list.removeChild(list.firstChild);
+    }
+    for (var tab in tabs) {
+      var node = document.createElement("li");
+      var a = document.createElement("a");
+      var id = tabs[tab].id;
+
+      a.text = tabs[tab].title;
+      a.setAttribute('href','#');
+      a.setAttribute('id', id);
+      list.appendChild(node);
+      a.addEventListener('click', function(e){
+        var x = e.target;
+        var tabId = parseInt(x.id);
+        chrome.tabs.update(tabId, {active: true}); 
+      });
+      node.appendChild(a);
+    }
+  }
+
+function addListenerMulti(el,events,func) {
+   for (var e in events) {
+    el.addEventListener(events[e], func);
+   }
+}
 
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById("audible").addEventListener("click", function() {
-    var tabsOfInterest = [];
 
     chrome.tabs.query({"audible":true}, function(tabs) {
-
-        for (var obj in tabs) {
-          var node = document.createElement("li");
-          var a = document.createElement("a");
-          var id = tabs[obj].id;
-
-          bgConsole(tabs[obj].title);
-          a.text = tabs[obj].title;
-          a.setAttribute('href','#');
-          a.setAttribute('id', id);
-          document.getElementById("list").appendChild(node);
-          a.addEventListener('click', function(e){
-            var x = e.target;
-            var tabId = parseInt(x.id);
-            chrome.tabs.update(tabId, {active: true}); 
-          });
-          node.appendChild(a);
-        }
+      appendResults(tabs);
       });
   });
-  document.getElementById("submit").addEventListener("click", function() {
+  var textbox = document.getElementById("search-box");
 
+  addListenerMulti(textbox,['keypress','mousedown'], function(eve) {
+
+    if ( eve.which == 13 ) eve.preventDefault();
     var searchText = document.getElementById('search-box').value;
     var keywords = parseText(searchText.toLowerCase());
     var tabsOfInterest = [];
 
       chrome.tabs.query({}, function(tabs) {
         tabsOfInterest = scoringSystem(tabs, keywords);
-
-        for (var obj in tabsOfInterest) {
-          var node = document.createElement("li");
-          var a = document.createElement("a");
-          var id = tabsOfInterest[obj].tab.id;
-
-          bgConsole(tabsOfInterest[obj].tab.title);
-          a.text = tabsOfInterest[obj].tab.title;
-          a.setAttribute('href','#');
-          a.setAttribute('id', id);
-          document.getElementById("list").appendChild(node);
-          a.addEventListener('click', function(e){
-            var x = e.target;
-            var tabId = parseInt(x.id);
-            chrome.tabs.update(tabId, {active: true}); 
-          });
-          node.appendChild(a);
-        }
+        appendResults(tabsOfInterest);
       });
     });
   });

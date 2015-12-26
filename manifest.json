@@ -1,45 +1,27 @@
 {
   "manifest_version": 2,
 
-  "name": "Cheezy Dibbles",
-  "description": "This extension shows a Google Image search result for the current page",
-  "version": "1.0",
+  "name": "Riem",
+  "description": "Find tabs of interest swiftly when your chrome window is cluttered with so many of them!",
+  "version": "0.1",
 
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "assets/cd-icon.png",
     "default_popup": "popup.html",
-    "default_title": "Dibble me!"
+    "default_title": "Riem"
   },
 
   "background": {
     "page": "background.html"
   },
 
-  "content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com; object-src 'self'",
+  "content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js; object-src 'self'",
 
   "permissions": [
     "activeTab",
-    "alarms",
-    "background",
-    "bookmarks",
-    "browsingData",
-    "clipboardRead",
-    "clipboardWrite",
-    "declarativeContent",
-    "desktopCapture",
-    "history",
-    "identity",
-    "management",
     "notifications",
-    "power",
-    "printerProvider",
-    "storage",
     "tabCapture",
     "tabs",
-    "topSites",
-    "tts",
-    "ttsEngine",
-    "unlimitedStorage",
     "https://ajax.googleapis.com/"
   ]
 }

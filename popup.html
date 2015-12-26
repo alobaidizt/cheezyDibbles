@@ -2,17 +2,32 @@
   <head>
     <title>CheezyDibbles Rock!</title>
 
-    <link rel="stylesheet" type="text/css" href="assets/style.css">
     <script type='text/javascript' src="popup.js"></script>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <meta name=viewport content="width=device-width, initial-scale=1">
 
   </head>
 
   <body>
 
     <form action="#">
-      <input id="search-box" name="searchWords" type="text" placeholder="Type Here.." >
-      <input id='submit' name="submit" type="submit" value='submit me'>
-      <input id='audible' name="audible" type="button" value='audible'>
+      <div class="mdl-layout-row">
+        <div style="left:10px;" class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+          <label class="mdl-button mdl-js-button mdl-button--icon" for="search-box">
+            <i class="material-icons">search</i>
+          </label>
+          <div class="mdl-textfield__expandable-holder">
+            <input class="mdl-textfield__input" type="text" id="search-box" autocomplete="off">
+            <label class="mdl-textfield__label" for="sample-expandable">Expandable Input</label>
+          </div>
+        </div>
+        <button id='audible' class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary layout-right" type='button' name="audible" value='audible' >
+          <i class="material-icons">volume_mute</i>
+        </button>
+      </div>
     </form>
 
     <ul id="list">

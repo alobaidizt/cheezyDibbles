@@ -8,8 +8,12 @@ body {
   font-size: 100%;
 }
 
+ul {
+    list-style-type: none;
+}
+
 li {
-  font-size: xx-small;
+  font-size: x-small;
 }
 
 #status {
@@ -18,4 +22,21 @@ li {
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: 400px;
+}
+
+.layout-right {
+    float: right;
+    margin-right:10px;
+    margin-top:20px;
+}
+
+#list li a{
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#list li:before {
+    content: "\2765"; /* unicode number*/
+    padding-right: 8px;
+    color: #3F51B5;
 }
